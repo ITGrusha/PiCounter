@@ -1,8 +1,6 @@
 from math import *
-# from numpy import float64 as float256
-from scipy.special import gamma
-from numpy import dtype
-import scipy
+from scipy.special import factorial
+from numpy import float64
 
 
 def to_fixed(num_obj, digits=0):
@@ -10,14 +8,15 @@ def to_fixed(num_obj, digits=0):
 
 
 def main(k: int):
-    float256 = scipy.dtype('f')
-    my_pi = float256(1)
-    part_sum = float256(0)
+    my_pi = float64(1)
+    part_sum = float64(0)
     for j in range(k + 1):
-        i = float256(j)
-        tmp = gamma(float256(4) * i) * (float256(1103) + float256(26390) * i) / (gamma(i) ** float256(4) * float256(396) ** (float256(4) * i))
+        i = float64(j)
+        tmp = factorial(float64(4) * i) * \
+              (float64(1103) + float64(26390) * i) \
+              / (factorial(i) ** float64(4) * float64(396) ** (float64(4) * i))
         part_sum += tmp
-    my_pi *= float256(9801) / (float256(2) * float256(2) ** float256(0.5))
+    my_pi *= float64(9801) / (float64(2) * float64(2) ** float64(0.5))
     my_pi /= part_sum
     print(to_fixed(my_pi, k * 10))
 
